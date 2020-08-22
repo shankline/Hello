@@ -2,18 +2,26 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.widget.Toast
 import  androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.fragment_second.*
+import okhttp3.*
 
 class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        class RegistrationActivity : AppCompatActivity() {
-            val phoneNumber = etPhoneNumber.text.toString()
-            val password = etPassword.text.toString()
-            val passwordConfirmation = etConfirmPassword.text.toString()
+
+
+        class RegistrationActivity(
+            firstName: String,
+            lastName: String,
+            email: String,
+            phoneNumber: String
+        ) : AppCompatActivity() {
+            val userName= edUserName.text.toString()
+            val password = edPassword.text.toString()
+            val passwordConfirmation = edConfirmPassword.text.toString()
 
             var requestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -32,28 +40,34 @@ class RegistrationActivity : AppCompatActivity() {
 
     fun registerUser(requestBody: RequestBody) {
         var apiClient = ApiClient.buildService(ApiInterface::class.java)
-        var registrationCall = apiClient.registerStudent(requestBody)
-        registrationCall.enqueue(object : Callback<RegistrationResponse> {
-            override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
-                Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(
-                call: Call<RegistrationResponse>,
-                response: Response<RegistrationResponse>
-            ) {
-                if (response.isSuccessful) {
-                    Toast.makeText(baseContext, response.body()?.message, Toast.LENGTH_LONG).show()
-                    startActivity(Intent(baseContext, MainActivity::class.java))
-                } else {
-                    Toast.makeText(baseContext, response.errorBody().toString(), Toast.LENGTH_LONG)
-                        .show()
+        var registrationCall = apiClient.registerUser(requestBody).apply {
+            enqueue(object : Callback<RegistractionResponse> {
+                override fun onFailure(call: Call<RegistractionResponse>, t: Throwable) {
+                    Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
                 }
-            }
-        })
+
+                override fun onResponse(
+                    call: Call<RegistractionResponse>,
+                    response: Response<RegistractionResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(baseContext, response.body()?.message, Toast.LENGTH_LONG).show()
+                        startActivity(Intent(baseContext, MainActivity::class.java))
+                    } else {
+                        Toast.makeText(baseContext, response.errorBody().toString(), Toast.LENGTH_LONG)
+                            .show()
+                    }
+                }
+            })
+        }
+    }
+
+    private fun enqueue(any: Any) {
+        TODO("Not yet implemented")
     }
 }
 
-class RegistrationResponse {
+private fun Any.registerUser(requestBody: RequestBody): Any {
 
 }
+

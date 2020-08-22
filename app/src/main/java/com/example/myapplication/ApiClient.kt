@@ -6,12 +6,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.net.URI.create
 
 object ApiClient {
+    fun buildService(java: Class<ApiInterface>): Any {
+
+    }
+
     var client = OkHttpClient.Builder().build()
 
     var retrofit = Retrofit.Builder()
         .baseUrl("https://courses-service.herokuapp.com/")
         .addConverterFactory(GsonConverterFactory.create
-        .client(client)
+        .run(client)
         .build()
 
     fun <T> buildService(service: Class<T>): T {
