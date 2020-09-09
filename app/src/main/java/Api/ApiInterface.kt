@@ -1,8 +1,8 @@
-package com.example.myapplication
+package Api
 
-import android.telecom.Call
-import okhttp3.Call
-import retrofit2.Call
+import models.Course
+import models.LoginResponse
+import models.RegistractionResponse
 
 package com.example.hello
 import ke.co.hello.RegistrationResponse

@@ -1,9 +1,8 @@
-package com.example.myapplication
+package Api
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.URI.create
 
 object ApiClient {
     fun buildService(java: Class<ApiInterface>): Any {

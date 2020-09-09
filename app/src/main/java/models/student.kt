@@ -1,4 +1,4 @@
-package com.example.myapplication
+package models
 
 data class student (
     @SerializedName("student_id") var studentId: String,

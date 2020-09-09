@@ -1,21 +1,22 @@
-package com.example.myapplication
+package Activity
 
+import Api.ApiClient
+import Api.ApiInterface
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import com.example.myapplication.R
 import kotlinx.android.synthetic.main.fragment_second.*
+import models.Course
+import models.LoginResponse
 import okhttp3.*
 
 class MainActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    fun onCreate(savedInstanceState: Bundle?, tvRegister: Any) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -34,11 +35,11 @@ class MainActivity : AppCompatActivity() {
                 .addFormDataPart("password", password)
                 .build()
 
-            loginUser(requestBody)
+            loginUser(requestBody,)
         }
     }
 
-    fun loginUser(requestBody: RequestBody){
+    fun loginUser(requestBody: RequestBody, awesomeValidation: Any){
         val apiClient = ApiClient.buildService(ApiInterface::class.java)
         val loginCall = apiClient.loginstudent(requestBody)
 
@@ -74,10 +75,14 @@ class MainActivity : AppCompatActivity() {
 
             @Override
             public void onClick(View view) {
-                if (view == buttonlogin) {
+                if (view == button  login) {
                     Registractionform();
                 }
             }
     }
     }
+
+private fun Any.setOnClickListener(function: () -> Unit) {
+
+}
 }

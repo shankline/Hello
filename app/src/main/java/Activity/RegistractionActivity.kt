@@ -1,10 +1,13 @@
-package com.example.myapplication
+package Activity
 
+import Api.ApiClient
+import Api.ApiInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import  androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.fragment_second.*
+import models.RegistractionResponse
 import okhttp3.*
 
 class RegistrationActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.myapplication
+package models
 
 data class RegistractionResponse(
     @SerializedName("message") var message: String,
